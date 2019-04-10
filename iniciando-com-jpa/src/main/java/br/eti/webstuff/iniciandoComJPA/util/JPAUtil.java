@@ -11,7 +11,7 @@ public class JPAUtil {
 	private static JPAUtil instance;
 	
 	private JPAUtil(){
-		this.factory = Persistence.createEntityManagerFactory("persistence-test");
+		this.factory = Persistence.createEntityManagerFactory("mysql");
 	}
 	
 	public static synchronized JPAUtil getInstance(){

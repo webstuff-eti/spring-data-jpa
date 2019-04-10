@@ -71,7 +71,7 @@ public abstract class GenericDAO<T extends Serializable> {
 		EntityManager entityManager = getEntityManager();
 		entityManager.getTransaction().begin();
 		
-		Query query = entityManager.createQuery("select count(c) from" + aClass.getSimpleName() + "c");
+		Query query = entityManager.createQuery("select count(c) from " + aClass.getSimpleName() + " c");
 		
 		long count = (Long) query.getSingleResult();
 		
@@ -143,7 +143,7 @@ public abstract class GenericDAO<T extends Serializable> {
 		return list;
 	}
 
-	// TODO: Testar implementação
+	
 	public List<T> findAllByCriteria() {
 
 		EntityManager entityManager = getEntityManager();
