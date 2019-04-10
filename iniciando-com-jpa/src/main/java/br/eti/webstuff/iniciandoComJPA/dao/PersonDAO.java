@@ -22,13 +22,13 @@ public class PersonDAO extends GenericDAO<Person> {
 	}
 
 	public List<Person> findAgeBetween(int min, int max) {
-		String jpql = "from Person p where p.age between ?1 and ?1";
+		String jpql = "from Person p where p.age between ?1 and ?2";
 		return find(jpql, min, max);
 	}
 
 	public Person findByFullName(String firstName, String lastName) {
 
-		String jpql = "from Person p where p.firstName like ? and p.lastName like ?1";
+		String jpql = "from Person p where p.firstName like ?1 and p.lastName like ?2";
 
 		return findOne(jpql, firstName, lastName);
 	}

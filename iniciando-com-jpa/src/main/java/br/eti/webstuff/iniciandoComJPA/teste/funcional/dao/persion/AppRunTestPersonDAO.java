@@ -19,16 +19,47 @@ public class AppRunTestPersonDAO {
         //findPersonById();             //- OK
         //showPeopleByCriteria();       //- OK
         //findByLastName();             //- OK
-        
-        //----------IMPLEMENTANDO
-         findByLastNameOne();         //---------> NOK
-        
+        //findByLastNameOne();          //- OK  
+        //findByAge();                  //- OK
+        //findByFullName();             //- OK
+        //updatePerson();               //- OK
+        //deletePerson();               //- OK
     }
     
     
 
     
-    private static void findByLastName() {
+    private static void deletePerson() {
+		new PersonDAO().delete(1L);
+	}
+
+	private static void updatePerson() {
+    	
+    	Person personFullName = new PersonDAO().findByFullName("Tiago", "Tibães");
+    	System.out.println("Antes UPDATE: " + personFullName.toString());
+    	
+    	personFullName.setLastName("Poliano");
+    	new PersonDAO().update(personFullName);
+    	
+    	Person person = new PersonDAO().findByFullName("Tiago", "Poliano");
+    	System.out.println("Após UPDATE: " + person.toString());
+	}
+
+
+
+
+	private static void findByAge() {
+    	
+    	List<Person> people = new PersonDAO().findAgeBetween(25, 37);
+		for(Person p : people){
+			System.out.println(p.toString());	
+		}
+	}
+
+
+
+
+	private static void findByLastName() {
     	List<Person> pessoas =  new PersonDAO().findByLastName("Oliveira");//dao.findByLastName("Tibães");
     	for(Person person: pessoas){
     		System.out.println(person.toString());
@@ -57,8 +88,7 @@ public class AppRunTestPersonDAO {
 	}
 	
 	
-	
-	//findAllByCriteria
+	//TODO: findAllByCriteria
 
 	
 	public static void findPersonById() {
@@ -68,11 +98,17 @@ public class AppRunTestPersonDAO {
     	System.out.println(p2.toString());
     }
 	
-	
 	private static void showPeopleByCriteria() {
     	List<Person> persons = new PersonDAO().findAllByCriteria();
     	for (Person p : persons) {
 	    	System.out.println(p.toString());
 		}
 	}
+	
+	private static void findByFullName(){
+		Person person = new PersonDAO().findByFullName("Rafael", "Godoy");
+		System.out.println(person.toString());
+	}
+	
+	
 }

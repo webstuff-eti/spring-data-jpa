@@ -84,7 +84,6 @@ public abstract class GenericDAO<T extends Serializable> {
 	public T findOne(String jpql, Object... params) {
 
 		EntityManager entityManager = getEntityManager();
-
 		entityManager.getTransaction().begin();
 
 		// Exemplo JPQL: "from Person p where p.name like ? and p.age = ?"
@@ -100,7 +99,6 @@ public abstract class GenericDAO<T extends Serializable> {
 		entityManager.close();
 
 		return entity;
-
 	}
 	
 	@SuppressWarnings("unchecked")
