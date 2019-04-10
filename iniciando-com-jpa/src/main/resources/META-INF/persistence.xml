@@ -3,10 +3,7 @@
 	
 	<persistence-unit name="mysql" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-<<<<<<< HEAD:iniciando-com-jpa/src/main/resources/META-INF/persistence.xml
-=======
 		<class>br.eti.webstuff.iniciandoComJPA.entities.Person</class>
->>>>>>> aula-10:iniciando-com-jpa/src/main/resources/META-INF/persistence.xml
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpabd"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

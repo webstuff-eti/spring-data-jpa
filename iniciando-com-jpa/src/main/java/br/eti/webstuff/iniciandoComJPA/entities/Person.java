@@ -32,14 +32,6 @@ import javax.persistence.Table;
 )
 public class Person implements Serializable {
 
-<<<<<<< HEAD
-=======
-	
-
-	/**
-	 * 
-	 */
->>>>>>> aula-10
 	private static final long serialVersionUID = 7460596290825967253L;
 
 	@Id

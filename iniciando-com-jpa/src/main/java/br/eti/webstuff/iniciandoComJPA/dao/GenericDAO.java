@@ -69,15 +69,9 @@ public abstract class GenericDAO<T extends Serializable> {
 
 		EntityManager entityManager = getEntityManager();
 		entityManager.getTransaction().begin();
-<<<<<<< HEAD
 		
 		Query query = entityManager.createQuery("select count(c) from " + aClass.getSimpleName() + " c");
 		
-=======
-
-		Query query = entityManager.createQuery("select count(c) from " + aClass.getSimpleName() + " c");
-
->>>>>>> aula-10
 		long count = (Long) query.getSingleResult();
 
 		entityManager.getTransaction().commit();
@@ -164,10 +158,7 @@ public abstract class GenericDAO<T extends Serializable> {
 		return list;
 	}
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> aula-10
+
 	public List<T> findAllByCriteria() {
 
 		EntityManager entityManager = getEntityManager();

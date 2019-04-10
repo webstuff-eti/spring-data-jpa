@@ -4,22 +4,12 @@ import java.util.List;
 
 import br.eti.webstuff.iniciandoComJPA.dao.PersonDAO;
 import br.eti.webstuff.iniciandoComJPA.entities.Person;
-import br.eti.webstuff.iniciandoComJPA.teste.funcional.build.PopulaPerson;
 
 
 public class AppRunTestPersonDAO {
 	
 	
-<<<<<<< HEAD
-    public static void main( String[] args )
-    {
-        System.out.println( "Populando dados na tabela PERSONS do Banco de dados jpabd" );
-        //PopulaPerson.insertPersons();
-        //showCountPeople();
-        //showPeople();
-        //findPersonById();
-        showPeopleByCriteria();
-=======
+
     public static void main( String[] args ){
     	
         System.out.println( "Populando dados na tabela PERSONS do Banco de dados jpabd" );
@@ -31,20 +21,15 @@ public class AppRunTestPersonDAO {
         //findByLastName();             //- OK
         
         //----------IMPLEMENTANDO
-        // findByLastNameOne();         //---------> NOK
->>>>>>> aula-10
+         findByLastNameOne();         //---------> NOK
         
     }
     
     
-<<<<<<< HEAD
-    private static void showCountPeople() {
-=======
+
     
     private static void findByLastName() {
-		
     	List<Person> pessoas =  new PersonDAO().findByLastName("Oliveira");//dao.findByLastName("Tibães");
-    	
     	for(Person person: pessoas){
     		System.out.println(person.toString());
     	}
@@ -52,16 +37,13 @@ public class AppRunTestPersonDAO {
     
     
     private static void findByLastNameOne() {
-    	
     	PersonDAO dao = new PersonDAO();
-		
     	Person person = dao.findByLastNameOne("Tibães");
     	System.out.println(person.toString());
 	}
 
 
 	private static void showCountPeople() {
->>>>>>> aula-10
 		long total = new PersonDAO().count();
 		System.out.println("Total of Persons: " + total);		
 	}
