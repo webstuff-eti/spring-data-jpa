@@ -64,71 +64,86 @@ public abstract class GenericDAO<T extends Serializable> {
 		entityManager.close();
 		return entity;
 	}
-	
-	
-	public long count(){
-		
+
+	public long count() {
+
 		EntityManager entityManager = getEntityManager();
 		entityManager.getTransaction().begin();
-		
-		Query query = entityManager.createQuery("select count(c) from" + aClass.getSimpleName() + "c");
-		
+
+		Query query = entityManager.createQuery("select count(c) from " + aClass.getSimpleName() + " c");
+
 		long count = (Long) query.getSingleResult();
-		
+
 		entityManager.getTransaction().commit();
 		entityManager.close();
-		
+
 		return count;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public T findOne(String jpql, Object... params){
-		
+	public T findOne(String jpql, Object... params) {
+
 		EntityManager entityManager = getEntityManager();
 
 		entityManager.getTransaction().begin();
-		
-		//Exemplo JPQL: "from Person p where p.name like ? and p.age = ?"
+
+		// Exemplo JPQL: "from Person p where p.name like ? and p.age = ?"
 		Query query = entityManager.createQuery(jpql);
-		
-		for(int i = 0; i < params.length; i++){
-			query.setParameter(i+1, params[i]);
+
+		for (int i = 0; i < params.length; i++) {
+			query.setParameter(i + 1, params[i]);
 		}
-		
+
 		T entity = (T) query.getSingleResult();
-		
+
 		entityManager.getTransaction().commit();
 		entityManager.close();
-		
-		return entity;
-		
-	}
 
-	
+		return entity;
+
+	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> find(String jpql, Object... params){
+	public List<T> find(String jpql, Object... params) {
 		
-		EntityManager entityManager = getEntityManager();
-
-		entityManager.getTransaction().begin();
+		EntityManager manager = getEntityManager();
+		manager.getTransaction().begin();
 		
-		//Query query = entityManager.createQuery("from Person p where p.name like ? and p.age = ?");
-		Query query = entityManager.createQuery(jpql);
+		Query query = manager.createQuery(jpql);
 		
-		for(int i = 0; i < params.length; i++){
+		for (int i = 0; i < params.length; i++) {
 			query.setParameter(i+1, params[i]);
 		}
 		
-		List<T> entities =  query.getResultList();
+		List<T> entities = query.getResultList();
 		
-		entityManager.getTransaction().commit();
-		entityManager.close();
+		manager.getTransaction().commit();
+		manager.close();
 		
 		return entities;
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	public List<T> findT(String jpql, String param) {
 		
+		EntityManager manager = getEntityManager();
+		manager.getTransaction().begin();
+		
+		//FIXME: BANCO -> select * from jpabd.persons p where p.last_name like "Oliveira";
+		Query query = manager.createQuery(jpql);
+		
+		query.setParameter(1, param);
+			
+		List<T> entities = query.getResultList();
+		
+		manager.getTransaction().commit();
+		manager.close();
+		
+		return entities;
 	}
 
+	
 	@SuppressWarnings("unchecked")
 	public List<T> findAllByJPQL() {
 
@@ -143,7 +158,6 @@ public abstract class GenericDAO<T extends Serializable> {
 		return list;
 	}
 
-	// TODO: Testar implementação
 	public List<T> findAllByCriteria() {
 
 		EntityManager entityManager = getEntityManager();
