@@ -51,6 +51,17 @@ public abstract class GenericDAO<T extends Serializable> {
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}
+	
+	public void delete(T entity) {
+
+		EntityManager entityManager = getEntityManager();
+
+		entityManager.getTransaction().begin();
+		//FIXME: Realiza UPDATE em Cascata
+		entityManager.remove(entityManager.merge(entity));
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
 
 	public T searchById(Long id) {
 
