@@ -4,6 +4,7 @@
 	<persistence-unit name="mysql" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.eti.webstuff.iniciandoComJPA.entities.Person</class>
+		<class>br.eti.webstuff.iniciandoComJPA.entities.Document</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpabd"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
