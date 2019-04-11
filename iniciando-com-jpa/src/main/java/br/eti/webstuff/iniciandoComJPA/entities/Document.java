@@ -15,28 +15,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "DOCUMENTS")
 public class Document implements Serializable {
-	
+
 	private static final long serialVersionUID = 4282805585863570118L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@Column(name = "CPF", nullable = false, length = 14, unique = true)
 	private String cpf;
 
 	@Column(name = "RG", nullable = false, length = 14, unique = true)
 	private String rg;
-	
-	/*
-	  Regra JPA: ToOne  - >  FetchType.EAGER [é default]
-	             ToMany - >  FetchType.LAZY
-	*/
-	
-	//@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "DOCUMENT_ID")
-	private Document document;
 
 	public Document() {
 		super();
@@ -47,11 +37,11 @@ public class Document implements Serializable {
 		this.rg = rg;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -69,16 +59,6 @@ public class Document implements Serializable {
 
 	public void setRg(String rg) {
 		this.rg = rg;
-	}
-	
-	
-
-	public Document getDocument() {
-		return document;
-	}
-
-	public void setDocument(Document document) {
-		this.document = document;
 	}
 
 	@Override
@@ -108,7 +88,7 @@ public class Document implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Document [id=" + id + ", cpf=" + cpf + ", rg=" + rg + ", document=" + document + "]";
+		return "Document [id=" + id + ", cpf=" + cpf + ", rg=" + rg + "]";
 	}
 
 }

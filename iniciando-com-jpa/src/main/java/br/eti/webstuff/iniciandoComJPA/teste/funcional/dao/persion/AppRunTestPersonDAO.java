@@ -2,8 +2,11 @@ package br.eti.webstuff.iniciandoComJPA.teste.funcional.dao.persion;
 
 import java.util.List;
 
+import br.eti.webstuff.iniciandoComJPA.dao.DocumentDAO;
 import br.eti.webstuff.iniciandoComJPA.dao.PersonDAO;
+import br.eti.webstuff.iniciandoComJPA.entities.Document;
 import br.eti.webstuff.iniciandoComJPA.entities.Person;
+import br.eti.webstuff.iniciandoComJPA.teste.funcional.build.PopulaPersonWithDocument;
 
 
 public class AppRunTestPersonDAO {
@@ -24,12 +27,44 @@ public class AppRunTestPersonDAO {
         //findByFullName();             //- OK
         //updatePerson();               //- OK
         //deletePerson();               //- OK
+        
+       // PopulaPersonWithDocument.insertPersonsWithDocuments();   //- OK
+       // updateAllPersonWithDocument();                           //- OK
+        findPersonByCPFWithDocument();
+        
     }
     
     
 
-    
-    private static void deletePerson() {
+	private static void findPersonByCPFWithDocument() {
+		Person person = new PersonDAO().findByCpf("111.222.555-43");
+		System.out.println(person.toString());
+	}
+
+
+
+	private static void updateAllPersonWithDocument() {
+		
+		List<Person> people = new PersonDAO().findAllByJPQL();
+        
+		Integer digCPF = 0;
+		Integer digRG  = 0;
+		
+		for(Person p : people){
+			digCPF = digCPF + 1;
+			digRG =   digRG + 1;
+			if(p.getDocument() == null){
+				p.setDocument(new Document("111.222.555-4" + digCPF.toString(), "MG-11.555.33" + digRG.toString()));
+				updatePersonWithDocument(p);
+			}
+		}
+	}
+
+	private static void updatePersonWithDocument(Person p) {
+		new PersonDAO().update(p);
+	}
+
+	private static void deletePerson() {
 		new PersonDAO().delete(1L);
 	}
 

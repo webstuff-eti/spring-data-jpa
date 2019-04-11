@@ -85,8 +85,7 @@ public abstract class GenericDAO<T extends Serializable> {
 
 		EntityManager entityManager = getEntityManager();
 		entityManager.getTransaction().begin();
-
-		// Exemplo JPQL: "from Person p where p.name like ? and p.age = ?"
+		
 		Query query = entityManager.createQuery(jpql);
 
 		for (int i = 0; i < params.length; i++) {
@@ -170,6 +169,18 @@ public abstract class GenericDAO<T extends Serializable> {
 
 		entityManager.close();
 		return list;
+	}
+	
+	public T findById(Long id){
+		EntityManager manager = getEntityManager();
+		manager.getTransaction().begin();
+		
+		T entity = (T) manager.find(aClass, id);
+		
+		manager.getTransaction().commit();
+		manager.close();
+		
+		return entity;
 	}
 
 }

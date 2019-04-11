@@ -2,15 +2,16 @@ package br.eti.webstuff.iniciandoComJPA.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-
 
 //FIXME: UTILIZAR PARA VERSÃO 2.0
 /*
@@ -26,10 +27,8 @@ import javax.persistence.Table;
 */
 
 @Entity
-@Table(
-		name = "PERSONS", 				
-	    indexes = {@Index(columnList = "FIRST_NAME, LAST_NAME", name = "IDX_PERSON_NAME", unique = true)}
-)
+@Table(name = "PERSONS", indexes = {
+		@Index(columnList = "FIRST_NAME, LAST_NAME", name = "IDX_PERSON_NAME", unique = true) })
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = 7460596290825967253L;
@@ -47,6 +46,16 @@ public class Person implements Serializable {
 
 	@Column(name = "AGE", nullable = false)
 	private Integer age;
+
+	/*
+	 * Regra JPA: ToOne - > FetchType.EAGER [é default] ToMany - >
+	 * FetchType.LAZY
+	 */
+
+	// @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "DOCUMENT_ID")
+	private Document document;
 
 	public Long getId() {
 		return id;
@@ -80,6 +89,14 @@ public class Person implements Serializable {
 		this.age = age;
 	}
 
+	public Document getDocument() {
+		return document;
+	}
+
+	public void setDocument(Document document) {
+		this.document = document;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,7 +124,8 @@ public class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + "]";
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
+				+ ", document=" + document + "]";
 	}
 
 }
