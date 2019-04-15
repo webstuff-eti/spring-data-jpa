@@ -42,14 +42,13 @@ public class Address implements Serializable {
 	private TypeAddress type;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "PERSONS_ADDRESSES", joinColumns = @JoinColumn(name = "ID_ADDRESS"), // ,
-																							// referencedColumnName="id"
-			inverseJoinColumns = @JoinColumn(name = "ID_PERSON") // ,
-																	// referencedColumnName="id"
+	@JoinTable(name = "PERSONS_ADDRESSES", 
+	        joinColumns = @JoinColumn(name = "ID_ADDRESS"),
+			inverseJoinColumns = @JoinColumn(name = "ID_PERSON")
 	)
 
-	private Set<Person> persons; // = new HashSet();
-
+	private Set<Person> persons; 
+	
 	public Long getId() {
 		return id;
 	}

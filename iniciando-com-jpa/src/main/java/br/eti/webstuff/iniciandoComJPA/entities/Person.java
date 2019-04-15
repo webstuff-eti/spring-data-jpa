@@ -67,10 +67,10 @@ public class Person implements Serializable {
 
 	// FIXME: Relacionamento bidirecional
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "PERSONS_ADDRESSES", joinColumns = @JoinColumn(name = "ID_PERSON"), // ,
-																							// referencedColumnName="id"
-			inverseJoinColumns = @JoinColumn(name = "ID_ADDRESS")) // ,
-																	// referencedColumnName="id"
+	@JoinTable(name = "PERSONS_ADDRESSES", 
+	        joinColumns = @JoinColumn(name = "ID_PERSON"), 																	
+			inverseJoinColumns = @JoinColumn(name = "ID_ADDRESS")) 
+		
 	private Set<Address> addresses;
 
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

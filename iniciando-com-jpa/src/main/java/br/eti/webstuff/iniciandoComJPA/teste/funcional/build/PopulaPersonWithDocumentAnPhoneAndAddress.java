@@ -16,32 +16,32 @@ public class PopulaPersonWithDocumentAnPhoneAndAddress {
 	public static void insertPersonsWithDocumentsAndPhoneAndAddress() {
 		
 		Address addressHome = new Address();
-		addressHome.setCity("Santa Rita do Sapucaí");
+		addressHome.setCity("Pouso Alegre");
 		addressHome.setStreet("Rua xyz, 01");
 		addressHome.setType(TypeAddress.RESIDENCIAL);
 
 		Address addressWork = new Address();
-		addressWork.setCity("São José dos Campos");
+		addressWork.setCity("Pouso Alegre");
 		addressWork.setStreet("Rua zyx, 02");
 		addressWork.setType(TypeAddress.COMERCIAL);
 		
-		Person maria = new Person();
-		maria.setFirstName("Maria");
-		maria.setLastName("Tibães");
-		maria.setAge(83);
-		maria.setDocument(new Document("777.777.777-77", "MG-55.555.555"));
+		Person joao = new Person();
+		joao.setFirstName("João");
+		joao.setLastName("Tibães");
+		joao.setAge(93);
+		joao.setDocument(new Document("333.333.333-33", "MG-11.111.111"));
 		
-		Phone phone = new Phone(TypePhone.CELULAR, "98257-3423");
-		maria.addPhone(phone);		
+		Phone phone = new Phone(TypePhone.RESIDENCIAL, "3471-3356");
+		joao.addPhone(phone);		
 		
 		Set<Address> ad = new HashSet<Address>();
 		ad.add(addressWork);
 		ad.add(addressHome);
 
-		maria.setAddresses(ad);
+		joao.setAddresses(ad);
 
-		new PersonDAO().save(maria);
-		System.out.println(new PersonDAO().findById(maria.getId()));
+		new PersonDAO().save(joao);
+		System.out.println(new PersonDAO().findById(joao.getId()));
 	}
 
 }
