@@ -13,11 +13,11 @@ public class AppRunTestPhoneDAO {
 
 	public static void main(String[] args) {
 
-		//insertPhone();      // - OK
+		insertPhone();      // - OK
 		//updatePhone();      // - OK
 		//updatePhoneWithValidator(); // - OK
-		deletePersonOnCascadeAllByPhone();
-		deletePhoneOfPersonOnCascadeByPhone();	
+		// deletePersonOnCascadeAllByPhone();    
+		// deletePhoneOfPersonOnCascadeByPhone();	
 		
 	}
 	
@@ -89,14 +89,14 @@ public class AppRunTestPhoneDAO {
 
 	private static void insertPhone() {
 		
-		Person aleixe = new Person();
-		aleixe.setFirstName("Aleixe");
-		aleixe.setLastName("Tibaes");
-		aleixe.setAge(26);
-		aleixe.setDocument(new Document("023.999.135-99", "MG-71.245.789"));
+		Person tiago = new Person();
+		tiago.setFirstName("Tiago");
+		tiago.setLastName("Tibaes");
+		tiago.setAge(26);
+		tiago.setDocument(new Document("000.999.135-99", "MG-00.245.789"));
 
-		Phone phone = new Phone(TypePhone.CELULAR, "035987342356");
-		phone.setPerson(aleixe);
+		Phone phone = new Phone(TypePhone.CELULAR, "035987999356");
+		phone.setPerson(tiago);
 		
 		PhoneDAO dao = new PhoneDAO();
 		

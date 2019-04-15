@@ -1,7 +1,7 @@
 package br.eti.webstuff.iniciandoComJPA.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,36 +17,38 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ADDRESSES") 
+@Table(name = "ADDRESSES")
 public class Address implements Serializable {
-	
-	public enum TypeAddress{
+
+	private static final long serialVersionUID = -6283231834726046256L;
+
+	public enum TypeAddress {
 		COMERCIAL, RESIDENCIAL
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ADDRESS")
-	private Long id; 
-	
+	private Long id;
+
 	@Column(name = "CITY", nullable = false)
 	private String city;
-	
+
 	@Column(name = "STREET", nullable = false)
 	private String street;
-	
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TYPE_ADDRESS", nullable = false)
 	private TypeAddress type;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-	             name = "PERSONS_ADDRESSES",
-	             joinColumns = @JoinColumn(name = "ID_ADDRESS"),
-	             inverseJoinColumns = @JoinColumn(name = "ID_PERSON")
+	@JoinTable(name = "PERSONS_ADDRESSES", joinColumns = @JoinColumn(name = "ID_ADDRESS"), // ,
+																							// referencedColumnName="id"
+			inverseJoinColumns = @JoinColumn(name = "ID_PERSON") // ,
+																	// referencedColumnName="id"
 	)
-	private List<Person> persons;
+
+	private Set<Person> persons; // = new HashSet();
 
 	public Long getId() {
 		return id;
@@ -80,22 +82,20 @@ public class Address implements Serializable {
 		this.type = type;
 	}
 
-	public List<Person> getPersons() {
-		return persons;
-	}
-
-	public void setPersons(List<Person> persons) {
-		this.persons = persons;
-	}
-	
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
+	}
+
+	public Set<Person> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(Set<Person> persons) {
+		this.persons = persons;
 	}
 
 	@Override
@@ -120,6 +120,5 @@ public class Address implements Serializable {
 		return "Address [id=" + id + ", city=" + city + ", street=" + street + ", type=" + type + ", persons=" + persons
 				+ "]";
 	}
-	
-	
+
 }

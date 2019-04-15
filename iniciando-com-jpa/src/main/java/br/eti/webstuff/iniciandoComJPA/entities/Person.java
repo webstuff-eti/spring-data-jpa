@@ -2,7 +2,9 @@ package br.eti.webstuff.iniciandoComJPA.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -63,10 +65,13 @@ public class Person implements Serializable {
 	@JoinColumn(name = "DOCUMENT_ID")
 	private Document document;
 
-	//FIXME: Relacionamento bidirecional
+	// FIXME: Relacionamento bidirecional
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "PERSONS_ADDRESSES", joinColumns = @JoinColumn(name = "ID_PERSON"), inverseJoinColumns = @JoinColumn(name = "ID_ADDRESS"))
-	private List<Address> addresses;
+	@JoinTable(name = "PERSONS_ADDRESSES", joinColumns = @JoinColumn(name = "ID_PERSON"), // ,
+																							// referencedColumnName="id"
+			inverseJoinColumns = @JoinColumn(name = "ID_ADDRESS")) // ,
+																	// referencedColumnName="id"
+	private Set<Address> addresses;
 
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Phone> phones;
@@ -134,20 +139,20 @@ public class Person implements Serializable {
 		this.phones = phones;
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
+	}
+
+	public Set<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(Set<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 	@Override
