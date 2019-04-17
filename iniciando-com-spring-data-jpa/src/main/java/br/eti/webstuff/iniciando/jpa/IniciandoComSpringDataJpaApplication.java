@@ -1,4 +1,4 @@
-package br.eti.webstuff.iniciandocomspringdatajpa;
+package br.eti.webstuff.iniciando.jpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
