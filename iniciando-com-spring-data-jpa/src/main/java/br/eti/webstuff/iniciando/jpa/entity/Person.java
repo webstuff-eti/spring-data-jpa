@@ -2,7 +2,6 @@ package br.eti.webstuff.iniciando.jpa.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,22 +41,13 @@ public class Person implements Serializable {
 	@Column(name = "AGE", nullable = false)
 	private Integer age;
 
-	/*
-	 * Regra JPA: ToOne - > FetchType.EAGER [é default] ToMany - >
-	 * FetchType.LAZY
-	 */
-
-	// @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DOCUMENT_ID")
 	private Document document;
 
-	// FIXME: Relacionamento bidirecional
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "PERSONS_ADDRESSES", 
-	        joinColumns = @JoinColumn(name = "ID_PERSON"), 																	
-			inverseJoinColumns = @JoinColumn(name = "ID_ADDRESS")) 
-		
+	@JoinTable(name = "PERSONS_ADDRESSES", joinColumns = @JoinColumn(name = "ID_PERSON"), inverseJoinColumns = @JoinColumn(name = "ID_ADDRESS"))
+
 	private Set<Address> addresses;
 
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -71,7 +61,6 @@ public class Person implements Serializable {
 		phones.add(phone);
 	}
 
-	// FIXME: Remover telefone sem o modo em Cascade
 	public void deletePhone(Phone phone) {
 		if (phones != null) {
 			phones.remove(phone);

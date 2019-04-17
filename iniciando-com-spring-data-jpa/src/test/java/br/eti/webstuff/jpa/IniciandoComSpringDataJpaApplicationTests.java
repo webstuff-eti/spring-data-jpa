@@ -1,4 +1,4 @@
-package br.eti.webstuff.iniciandocomspringdatajpa;
+package br.eti.webstuff.jpa;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

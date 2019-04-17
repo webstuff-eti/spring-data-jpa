@@ -19,10 +19,10 @@ public class Document implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "CPF", nullable = false, length = 14, unique = true)
+	@Column(name = "CPF", nullable = false, length = 11, unique = true)
 	private String cpf;
 
-	@Column(name = "RG", nullable = false, length = 14, unique = true)
+	@Column(name = "RG", nullable = false, length = 9, unique = true)
 	private String rg;
 
 	public Document() {
