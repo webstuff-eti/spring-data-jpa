@@ -1,4 +1,4 @@
-package br.eti.webstuff;
+package br.eti.webstuff.api.jpa;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,10 +29,5 @@ public class IniciandoSpringDataJpaApplicationTests {
 		log.info("Conteto de Teste sucesso: " + contextoTest);
 		assertEquals("Contexto de Testes", contextoTest);
 	}
-	
-
-	
-	
-	
 
 }
