@@ -1,40 +1,46 @@
-CREATE TABLE empresa (
-  id 				bigint(20) 		PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  cnpj 				varchar(255) 	NOT NULL,
-  data_atualizacao 	datetime 		NOT NULL,
-  data_criacao 		datetime 		NOT NULL,
-  razao_social 		varchar(255) 	NOT NULL
-) ENGINE=InnoDB 	DEFAULT CHARSET=utf8;
+CREATE TABLE DOCUMENTS (
+  id 				bigint(20) 		NOT NULL AUTO_INCREMENT,
+  CPF				varchar(11) 	NOT NULL,
+  RG 	            varchar(12) 	NOT NULL,
+  CONSTRAINT PK_Document PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE funcionario (
-  id 						bigint(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  cpf 						varchar(255) NOT NULL,
-  data_atualizacao 			datetime NOT NULL,
-  data_criacao 				datetime NOT NULL,
-  email 					varchar(255) NOT NULL,
-  nome 						varchar(255) NOT NULL,
-  perfil 					varchar(255) NOT NULL,
-  qtd_horas_almoco 			float DEFAULT NULL,
-  qtd_horas_trabalho_dia 	float DEFAULT NULL,
-  senha 					varchar(255) NOT NULL,
-  valor_hora 				decimal(19,2) DEFAULT NULL,
-  empresa_id 				bigint(20) DEFAULT NULL
-) ENGINE=InnoDB 			DEFAULT CHARSET=utf8;
+--Criar tabela de Address
+CREATE TABLE ADDRESSES (
+	ID_ADDRESS 		bigint(20) 		NOT NULL AUTO_INCREMENT,
+	CITY			VARCHAR(30) 	NOT NULL,
+	STREET 			VARCHAR(30) 	NOT NULL,
+	TYPE_ADDRESS	VARCHAR(20) 	NOT NULL,
+	CONSTRAINT PK_Address PRIMARY KEY(ID_ADDRESS)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Constraints for table `funcionario`
-ALTER TABLE funcionario ADD FOREIGN KEY (empresa_id) REFERENCES empresa (id);
+CREATE TABLE PERSONS (
+  ID_PERSON  		bigint(20)  	NOT NULL 	AUTO_INCREMENT,
+  FIRST_NAME 		VARCHAR(30) 	NOT NULL,
+  LAST_NAME 		VARCHAR(30) 	NOT NULL,
+  AGE VARCHAR(30) 	NOT NULL,
+  DOCUMENT_ID 		bigint(20)  	DEFAULT NULL,
+  CONSTRAINT 		PK_Person 		PRIMARY KEY(ID_PERSON),
+  CONSTRAINT        FK_Document     FOREIGN KEY(DOCUMENT_ID) REFERENCES DOCUMENTS (id)
+) ENGINE=InnoDB    DEFAULT CHARSET=utf8;
+-- Constraints for table `PERSONS`
+--ALTER TABLE PERSONS ADD FOREIGN KEY (DOCUMENT_ID) REFERENCES DOCUMENTS (id);
 
-CREATE TABLE lancamento (
-  id 				bigint(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  data 				datetime NOT NULL,
-  data_atualizacao 	datetime NOT NULL,
-  data_criacao 		datetime NOT NULL,
-  descricao 		varchar(255) DEFAULT NULL,
-  localizacao 		varchar(255) DEFAULT NULL,
-  tipo varchar(255) NOT NULL,
-  funcionario_id 	bigint(20) DEFAULT NULL
-) ENGINE=InnoDB 	DEFAULT CHARSET=utf8;
+CREATE TABLE PHONES (
+	ID_PHONE				bigint(20) 				NOT NULL AUTO_INCREMENT,
+	TYPE_PHONE				VARCHAR(14) 			NOT NULL,
+	PHONE_NUMBER           	VARCHAR(14) 			NOT NULL,
+	PERSON_ID 				bigint(20)  			DEFAULT NULL,
+	CONSTRAINT 				PK_Phone 				PRIMARY KEY(ID_PHONE),
+	CONSTRAINT        		FK_Person     			FOREIGN KEY(PERSON_ID) REFERENCES PERSONS (ID_PERSON)
+) ENGINE=InnoDB    DEFAULT CHARSET=utf8;
+-- Constraints for table `PHONES`
+--ALTER TABLE PHONES ADD FOREIGN KEY (PERSON_ID) REFERENCES PERSONS (ID_PERSON);
 
--- Constraints for table `lancamento`
-ALTER TABLE lancamento ADD FOREIGN KEY (funcionario_id) REFERENCES funcionario (id);
-
+CREATE TABLE PERSONS_ADDRESSES (
+		ID_PERSON  bigint(20) NOT NULL,
+		ID_ADDRESS bigint(20) NOT NULL,
+		CONSTRAINT    PK_PersonsXAddresses  PRIMARY KEY(ID_PERSON, ID_ADDRESS),
+		CONSTRAINT    FK_PersonsXAddressesp FOREIGN KEY(ID_PERSON) REFERENCES PERSONS (ID_PERSON),
+		CONSTRAINT    FK_PersonsXAddressesa FOREIGN KEY(ID_ADDRESS) REFERENCES ADDRESSES (ID_ADDRESS)
+) ENGINE=InnoDB    DEFAULT CHARSET=utf8;
