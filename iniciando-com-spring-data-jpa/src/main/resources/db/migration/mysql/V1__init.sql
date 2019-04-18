@@ -1,5 +1,0 @@
-CREATE TABLE DOCUMENTS (
-  id 				bigint(20) 		PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  CPF				varchar(11) 	NOT NULL,
-  RG 	            varchar(12) 	NOT NULL
-) ENGINE=InnoDB 	DEFAULT CHARSET=utf8;
