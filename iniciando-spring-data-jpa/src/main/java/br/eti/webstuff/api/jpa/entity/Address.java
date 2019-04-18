@@ -18,8 +18,12 @@ import javax.persistence.Table;
 
 import br.eti.webstuff.enumeration.TypeAddress;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
+@Getter
+@Setter
 @EqualsAndHashCode
 @ToString
 @Entity
@@ -45,7 +49,6 @@ public class Address implements Serializable {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "PERSONS_ADDRESSES", joinColumns = @JoinColumn(name = "ID_ADDRESS"), inverseJoinColumns = @JoinColumn(name = "ID_PERSON"))
-
 	private Set<Person> persons;
 
 	public Long getId() {

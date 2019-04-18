@@ -18,7 +18,8 @@ public class AppRunTestAddressDAO {
 
 		List<Address> ads = new AddressDAO().findByListCity("Pouso Alegre");
 		
-		ads.stream().forEach(a -> System.out.println(a.getCity().toString()));
+		//TOOD: Fazer pull com a branch
+		//ads.stream().forEach(a -> System.out.println(a.getCity().toString()));
 
 	}
 
