@@ -8,7 +8,6 @@ import br.eti.webstuff.iniciando.jpa.entity.Document;
 
 public interface DocumentRepository extends JpaRepository<Document, Long>{
 
-	
 	@Transactional(readOnly = true)
 	Document findByCpf(String cpj);
 	

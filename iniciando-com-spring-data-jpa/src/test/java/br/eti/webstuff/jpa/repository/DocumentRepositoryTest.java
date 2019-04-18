@@ -3,6 +3,7 @@ package br.eti.webstuff.jpa.repository;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,40 +14,40 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.eti.webstuff.iniciando.jpa.entity.Document;
 import br.eti.webstuff.iniciando.jpa.repository.DocumentRepository;
+import br.eti.webstuff.jpa.builder.DadosComuns;
+import br.eti.webstuff.jpa.builder.DocumentBuilder;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
 public class DocumentRepositoryTest {
-
-	private static final Object CPF = "98824135013";
-	private static final String RG = "243588203";
 	
 	@Autowired
-	private DocumentRepository repository;
+	private DocumentRepository  documentRepository;
 
 	@Before
 	public void setUp() throws Exception {
-		Document document = new Document();
-
-		this.repository.save(document);
+		this.documentRepository.save(DocumentBuilder.createDocument());
+	}
+	
+	@After
+	public final void affterDown() {
+		this.documentRepository.deleteAll();
 	}
 
 	@Test
 	public void buscarPorCPF() {
-		Document document = this.repository.findByCpf((String) CPF);
-		assertEquals(CPF, document.getCpf());
+		Document document = this.documentRepository.findByCpf(DadosComuns.CPF);
+		Assert.assertEquals(DadosComuns.CPF, document.getCpf());
 	}
 
 	@Test
 	public void buscarPorRG() {
-		Document document = this.repository.findByRg(RG);
-		assertEquals(RG, document.getRg());
+		Document document = this.documentRepository.findByRg(DadosComuns.RG);
+		Assert.assertEquals(DadosComuns.RG, document.getRg());
 	}
 
-	@After
-	public final void affterDown() {
-		this.repository.deleteAll();
-	}
+	
 
 }
