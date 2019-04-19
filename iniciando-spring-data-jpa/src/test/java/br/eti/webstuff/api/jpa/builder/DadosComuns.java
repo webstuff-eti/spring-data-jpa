@@ -14,6 +14,11 @@ public class DadosComuns {
 	public static final String CITY = "Rio de Janeiro";
 	public static final String STREET = "Rua do Melão";
 	public static final TypeAddress TYPE_ADDRESS = TypeAddress.RESIDENCIAL;
+
+	//FIXEME: PERSONS
+	public static final String FIRST_NAME = "Rodrigo";
+	public static final String LAST_NAME = "Tibães";
+	public static final Integer AGE = 30;
 	
 	
 
