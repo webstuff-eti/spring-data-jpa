@@ -24,7 +24,11 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
 	//TODO: Permite a buscaq tanto do RG, quanto pelo CPF -Testar
 	@Transactional(readOnly = true)
-	@Query("FROM Person p WHERE p.document.cpf = :rgOrCpf OR p.document.cpf = :rgOrCpf")
-	Person findByDocument(@Param("rgOrCpf") String rgOrCpf);
+	@Query("FROM Person p WHERE p.document.cpf = :cpf")
+	Person findByDocumentCpf(@Param("cpf") String cpf);
+	
+	@Query("FROM Person p WHERE p.document.rg = :rg")
+	@Transactional(readOnly = true)
+	Person findByDocumentRg(@Param("rg") String rg);
 
 }

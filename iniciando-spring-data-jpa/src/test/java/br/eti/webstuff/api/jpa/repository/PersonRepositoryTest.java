@@ -14,6 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.eti.webstuff.api.jpa.builder.DadosComuns;
 import br.eti.webstuff.api.jpa.entity.Document;
 import br.eti.webstuff.api.jpa.entity.Person;
+import br.eti.webstuff.api.jpa.entity.Phone;
+import br.eti.webstuff.enumeration.TypePhone;
+
+import br.eti.webstuff.api.jpa.entity.Address;
+import br.eti.webstuff.enumeration.TypeAddress;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,20 +30,47 @@ public class PersonRepositoryTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		
 		Person person = new Person();
 		
 		person.setFirstName(DadosComuns.FIRST_NAME);
 		person.setLastName(DadosComuns.LAST_NAME);
 		person.setAge(DadosComuns.AGE);
 		
-		//TODO: Criar documento e setar em baixo
-		//person.setDocument(document);
+		Document document = new Document();
+		document.setCpf(DadosComuns.CPF);
+		document.setRg(DadosComuns.RG);
 		
-		//TODO: Criar Lista de Phones e setar em baixo
-		//person.setPhones(phones);
+		person.setDocument(document);
 		
-		//TODO: Criar Lista de Phones e setar em baixo
-		//person.setAddresses(addresses);
+				
+		Phone phoneCel = new Phone();
+		phoneCel.setPhoneNumber("11967549867");
+		phoneCel.setType(TypePhone.CELULAR);
+		
+		Phone phoneResidencial = new Phone();
+		phoneResidencial.setPhoneNumber("1167549867");
+		phoneResidencial.setType(TypePhone.RESIDENCIAL);
+		
+		Phone phoneComercial = new Phone();
+		phoneComercial.setPhoneNumber("1134459834");
+		phoneComercial.setType(TypePhone.COMERCIAL);
+		
+		
+		person.addPhone(phoneCel);
+		person.addPhone(phoneResidencial);
+		person.addPhone(phoneComercial);
+		
+		
+		Address addressHome = new Address();
+		addressHome.setCity("Sorocaba");
+		addressHome.setStreet("Rua dfsfsdfdsf, 99");
+		addressHome.setType(TypeAddress.RESIDENCIAL);
+
+		Address addressWork = new Address();
+		addressWork.setCity("Sorocaba");
+		addressWork.setStreet("Rua nhggn, 88");
+		addressWork.setType(TypeAddress.COMERCIAL);
 		
 		this.repository.save(person);
 	}
@@ -69,13 +101,13 @@ public class PersonRepositoryTest {
 	
 	@Test
 	public void buscarPeloDocumentoCpf() {
-		Person person = this.repository.findByDocument(DadosComuns.CPF);
+		Person person = this.repository.findByDocumentCpf(DadosComuns.CPF);
 		assertEquals(DadosComuns.CPF, person.getDocument().getCpf());
 	}
 	
 	@Test
 	public void buscarPeloDocumentoRg() {
-		Person person = this.repository.findByDocument(DadosComuns.RG);
+		Person person = this.repository.findByDocumentRg(DadosComuns.RG);
 		assertEquals(DadosComuns.RG, person.getDocument().getRg());
 	}
 	
