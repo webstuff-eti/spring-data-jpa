@@ -46,13 +46,13 @@ public class Phone implements Serializable {
 	private Person person;
 	
 	
-//	public Phone() {
-//		super();
-//	}
-//
-//	public Phone(TypePhone type, String number) {
-//		this.type = type;
-//		this.number = number;
-//	}
+	public Phone() {
+		super();
+	}
+
+	public Phone(TypePhone type, String phoneNumber) {
+		this.type = type;
+		this.phoneNumber = phoneNumber;
+	}
 
 }

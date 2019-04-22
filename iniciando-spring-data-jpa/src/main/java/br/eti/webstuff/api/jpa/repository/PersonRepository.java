@@ -1,5 +1,9 @@
 package br.eti.webstuff.api.jpa.repository;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,7 +26,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	@Query("FROM Person p WHERE p.id = :personId")
 	Person findById(@Param("personId") Long personId);
 
-	//TODO: Permite a buscaq tanto do RG, quanto pelo CPF -Testar
 	@Transactional(readOnly = true)
 	@Query("FROM Person p WHERE p.document.cpf = :cpf")
 	Person findByDocumentCpf(@Param("cpf") String cpf);
@@ -30,5 +33,20 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	@Query("FROM Person p WHERE p.document.rg = :rg")
 	@Transactional(readOnly = true)
 	Person findByDocumentRg(@Param("rg") String rg);
-
+	
+	@Transactional(readOnly = true)
+	Person findByCpfOrRg(String cpf, String rg);
+	
+	@Transactional(readOnly = true)
+	Person findByCpfAndRg(String cpf, String rg);
+	
+	
+	
+	@Transactional(readOnly = true)
+	@Query("FROM Person p JOIN p.addresses address WHERE address.city = :city")
+	Page<Person> findByPeopleByCity(@Param("city") String city, Pageable pageable);
+	
+	
+	public List<Person> findByPagesGreaterThan(@Param("pages") int pages);
+	
 }
