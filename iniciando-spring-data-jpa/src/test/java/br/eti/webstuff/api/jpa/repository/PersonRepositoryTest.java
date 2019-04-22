@@ -3,7 +3,10 @@ package br.eti.webstuff.api.jpa.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -75,6 +78,13 @@ public class PersonRepositoryTest {
 		addressWork.setStreet("Rua nhggn, 88");
 		addressWork.setType(TypeAddress.COMERCIAL);
 		
+		Set<Address> ad = new HashSet<Address>();
+		ad.add(addressWork);
+		ad.add(addressHome);
+		
+		person.setAddresses(ad);
+		
+		
 		this.repository.save(person);
 	}
 	
@@ -113,6 +123,33 @@ public class PersonRepositoryTest {
 	public void buscarPeloDocumentoRg() {
 		Person person = this.repository.findByDocumentRg(DadosComuns.RG);
 		assertEquals(DadosComuns.RG, person.getDocument().getRg());
+	}
+	
+	@Test
+	public void buscarPeloId() {
+		Person person = this.repository.findOne(DadosComuns.ID);
+		assertEquals(DadosComuns.ID, person.getId());
+	}
+	
+	@Test
+	public void buscarPeloParamId() {
+		Person person = this.repository.findById(DadosComuns.ID);
+		assertEquals(DadosComuns.ID, person.getId());
+	}
+	
+	
+	@Test
+	public void alteraPersonPeloId() {
+		
+		Person pessoaBuscada = this.repository.findOne(DadosComuns.ID);
+		assertEquals(DadosComuns.AGE, pessoaBuscada.getAge());
+		
+		pessoaBuscada.setAge(55);
+		
+		this.repository.save(pessoaBuscada);
+		Person p = this.repository.findOne(pessoaBuscada.getId());
+		assertEquals(DadosComuns.NEW_AGE, p.getAge());
+		
 	}
 	
 
