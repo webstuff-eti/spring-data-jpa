@@ -1,6 +1,7 @@
 package br.eti.webstuff.api.jpa.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,18 +36,9 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	Person findByDocumentRg(@Param("rg") String rg);
 	
 	@Transactional(readOnly = true)
-	Person findByCpfOrRg(String cpf, String rg);
-	
-	@Transactional(readOnly = true)
-	Person findByCpfAndRg(String cpf, String rg);
-	
-	
-	
-	@Transactional(readOnly = true)
 	@Query("FROM Person p JOIN p.addresses address WHERE address.city = :city")
 	Page<Person> findByPeopleByCity(@Param("city") String city, Pageable pageable);
 	
-	
-	public List<Person> findByPagesGreaterThan(@Param("pages") int pages);
+  //public Optional<Person> findByPagesGreaterThan(@Param("pages") int pages);
 	
 }
