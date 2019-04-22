@@ -1,6 +1,9 @@
 package br.eti.webstuff.api.jpa.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -101,8 +104,9 @@ public class PersonRepositoryTest {
 	
 	@Test
 	public void buscarPeloDocumentoCpf() {
-		Person person = this.repository.findByDocumentCpf(DadosComuns.CPF);
-		assertEquals(DadosComuns.CPF, person.getDocument().getCpf());
+		Optional<Person> person = this.repository.findByDocumentCpf(DadosComuns.CPF);
+		assertTrue(person.isPresent());
+		assertEquals(DadosComuns.CPF, person.get().getDocument().getCpf());
 	}
 	
 	@Test

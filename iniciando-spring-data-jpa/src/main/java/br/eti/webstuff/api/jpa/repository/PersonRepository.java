@@ -29,7 +29,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
 	@Transactional(readOnly = true)
 	@Query("FROM Person p WHERE p.document.cpf = :cpf")
-	Person findByDocumentCpf(@Param("cpf") String cpf);
+	Optional<Person> findByDocumentCpf(@Param("cpf") String cpf);
 	
 	@Query("FROM Person p WHERE p.document.rg = :rg")
 	@Transactional(readOnly = true)
@@ -38,6 +38,10 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	@Transactional(readOnly = true)
 	@Query("FROM Person p JOIN p.addresses address WHERE address.city = :city")
 	Page<Person> findByPeopleByCity(@Param("city") String city, Pageable pageable);
+
+	@Transactional(readOnly = true)
+	@Query("FROM Person p JOIN p.phones phone WHERE phone.phoneNumber = :phoneNumber")
+	Person findPersonByPhoneNumber(@Param("phoneNumber") String phoneNumber); 
 	
   //public Optional<Person> findByPagesGreaterThan(@Param("pages") int pages);
 	
