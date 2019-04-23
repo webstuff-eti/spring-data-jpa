@@ -42,11 +42,7 @@ public class PersonRepositoryTest {
 		person.setLastName(DadosComuns.LAST_NAME);
 		person.setAge(DadosComuns.AGE);
 
-		Document document = new Document();
-		document.setCpf(DadosComuns.CPF);
-		document.setRg(DadosComuns.RG);
-
-		person.setDocument(document);
+		person.setDocument(new Document(DadosComuns.CPF, DadosComuns.RG));
 
 		Phone phoneCel = new Phone();
 		phoneCel.setPhoneNumber("11967549867");
@@ -125,24 +121,15 @@ public class PersonRepositoryTest {
 		assertEquals(DadosComuns.ID, person.getId());
 	}
 
-	@Test
-	public void buscarPeloParamId() {
-		Person person = this.repository.findById(DadosComuns.ID);
-		assertEquals(DadosComuns.ID, person.getId());
-	}
 
-	// @Test
-	// public void alteraPersonPeloId() {
-	//
-	// Person pessoaBuscada = this.repository.findOne(DadosComuns.ID);
-	// assertEquals(DadosComuns.AGE, pessoaBuscada.getAge());
-	//
-	// pessoaBuscada.setAge(55);
-	//
-	// this.repository.save(pessoaBuscada);
-	// Person p = this.repository.findOne(pessoaBuscada.getId());
-	// assertEquals(DadosComuns.NEW_AGE, p.getAge());
-	//
-	// }
+	 @Test
+	 public void alteraPersonPeloId() {
+		 Optional<Person> pessoaBuscada = this.repository.findByDocumentCpf(DadosComuns.CPF);
+		 pessoaBuscada.get().setAge(DadosComuns.NEW_AGE);
+		
+		 this.repository.save(pessoaBuscada.get());
+		 Person p = this.repository.findOne(pessoaBuscada.get().getId());
+		 assertEquals(DadosComuns.NEW_AGE, p.getAge());
+	 }
 
 }

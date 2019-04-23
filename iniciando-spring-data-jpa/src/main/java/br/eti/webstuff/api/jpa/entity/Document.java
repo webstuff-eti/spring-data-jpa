@@ -10,11 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.Getter;
 
 
 @Data
-@Getter
 @Entity
 @Table(name = "DOCUMENTS")
 public class Document implements Serializable {
@@ -30,5 +28,14 @@ public class Document implements Serializable {
 
 	@Column(name = "RG", nullable = false, length = 9, unique = true)
 	private String rg;
+	
+	public Document(String cpf, String rg) {
+		this.cpf = cpf;
+		this.rg = rg;
+	}
+	
+	public Document () {
+		
+	}
 
 }

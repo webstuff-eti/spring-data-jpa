@@ -1,7 +1,7 @@
 package br.eti.webstuff.api.jpa.entity;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,9 +47,11 @@ public class Address implements Serializable {
 	@Column(name = "TYPE_ADDRESS", nullable = false)
 	private TypeAddress type;
 
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "PERSONS_ADDRESSES", joinColumns = @JoinColumn(name = "ID_ADDRESS"), inverseJoinColumns = @JoinColumn(name = "ID_PERSON"))
-	private Set<Person> persons;
+//	private Set<Person> persons;
+	private List<Person> persons;
 
 	public Long getId() {
 		return id;
@@ -82,12 +84,14 @@ public class Address implements Serializable {
 	public void setType(TypeAddress type) {
 		this.type = type;
 	}
+	
+	
 
-	public Set<Person> getPersons() {
+	public List<Person> getPersons() {
 		return persons;
 	}
 
-	public void setPersons(Set<Person> persons) {
+	public void setPersons(List<Person> persons) {
 		this.persons = persons;
 	}
 

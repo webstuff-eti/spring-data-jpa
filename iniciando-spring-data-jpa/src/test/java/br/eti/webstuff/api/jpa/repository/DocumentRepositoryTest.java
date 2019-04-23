@@ -26,9 +26,7 @@ public class DocumentRepositoryTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		Document document = new Document();
-		document.setCpf(DadosComuns.CPF);
-		document.setRg(DadosComuns.RG);
+		Document document = new Document(DadosComuns.CPF, DadosComuns.RG);
 		this.repository.save(document);
 	}
 	
