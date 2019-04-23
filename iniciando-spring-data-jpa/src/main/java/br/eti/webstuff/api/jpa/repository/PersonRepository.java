@@ -44,8 +44,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 	Person findPersonByPhoneNumber(@Param("phoneNumber") String phoneNumber); 
 	
 	
-	@Transactional(readOnly = true)
-	Person findOne(Long personId);
+//	@Transactional(readOnly = true)
+//	Person findOne(Long personId);
 	
   //public Optional<Person> findByPagesGreaterThan(@Param("pages") int pages);
 	

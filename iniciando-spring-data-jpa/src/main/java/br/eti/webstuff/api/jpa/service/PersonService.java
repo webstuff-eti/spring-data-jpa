@@ -1,8 +1,10 @@
 package br.eti.webstuff.api.jpa.service;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import br.eti.webstuff.api.jpa.entity.Person;
@@ -66,6 +68,19 @@ public class PersonService {
 		log.info("Excluindo a Pessoa pelo ID {}", id);
 		this.personRepository.delete(id);
 	}
+	
+	
+	/*TODO: Ordena Lista de Pessoas
+	public List<Person> ordenaListaDePessoas(){
+		log.info("Início de Ordenação - Lista de pessoas pelo Sobrenome {}");
+		
+		Sort sort = OrderList.ordenaListaPorParametro("lastName");
+		
+		List<Person> persons = this.personRepository.findAll(sort);
+		
+		return persons;
+	}
+	*/
 
 	
 }

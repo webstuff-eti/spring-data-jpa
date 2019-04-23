@@ -20,8 +20,5 @@ public class DadosComuns {
 	public static final String LAST_NAME = "Tibães";
 	public static final Integer AGE = 30;
 
-	public static final Object NEW_AGE = 37;
-	
-	
 
 }
